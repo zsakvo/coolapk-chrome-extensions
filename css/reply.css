@@ -33,7 +33,7 @@
 }
 
 .reply-body {
-  margin: 8px 40px;
+  margin: 12px 40px 24px 40px;
 }
 
 reply-body > p {
@@ -41,6 +41,7 @@ reply-body > p {
   color: #212121;
 }
 .deep-reply-wrapper {
+  margin-top: -12px;
   padding: 12px;
   margin-left: 28px;
   font-size: 14px;
