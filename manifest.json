@@ -11,12 +11,13 @@
   "content_scripts": [
     {
       "matches": ["*://*.coolapk.com/*"],
-      "js": ["js/jquery.js", "js/fancybox.js", "js/demo.js"],
-      "css": ["css/fancybox.css", "css/reply.css"]
+      "js": ["js/demo.js"],
+      "css": ["css/reply.css"]
     }
   ],
   "permissions": ["*://*.coolapk.com/*"],
   "background": {
     "scripts": ["js/token.js", "js/background.js"]
-  }
+  },
+  "web_accessible_resources": ["js/fancybox.js", "css/fancybox.css"]
 }

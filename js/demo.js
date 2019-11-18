@@ -5,6 +5,23 @@ contentWideMore();
 var feedID = window.location.href
   .replace("https://www.coolapk.com/feed/", "")
   .replace(/.shareKey.+/g, "");
+
+var fancyboxcss = document.createElement("link");
+fancyboxcss.type = "text/css";
+fancyboxcss.rel = "stylesheet";
+fancyboxcss.href = chrome.extension.getURL("css/fancybox.css");
+document
+  .getElementsByTagName("head")
+  .item(0)
+  .appendChild(fancyboxcss);
+
+var fancyboxjs = document.createElement("script");
+fancyboxjs.src = chrome.extension.getURL("js/fancybox.js");
+fancyboxjs.onload = function() {
+  this.parentNode.removeChild(this);
+};
+(document.head || document.documentElement).appendChild(fancyboxjs);
+
 chrome.runtime.sendMessage(
   "https://api.coolapk.com/v6/feed/detail?id=" + feedID,
   json => {
