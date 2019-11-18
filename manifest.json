@@ -11,8 +11,8 @@
   "content_scripts": [
     {
       "matches": ["*://*.coolapk.com/*"],
-      "js": ["js/demo.js"],
-      "css": ["css/reply.css"]
+      "js": ["js/jquery.js", "js/fancybox.js", "js/demo.js"],
+      "css": ["css/fancybox.css", "css/reply.css"]
     }
   ],
   "permissions": ["*://*.coolapk.com/*"],

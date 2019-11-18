@@ -102,18 +102,19 @@ function createFeedBody(msg, pic) {
   if (msg.indexOf("[图片]") != -1) {
     msg = msg.replace(
       "[图片]",
-      '<a target="_blank" href="' +
+      '<a data-fancybox="gallery" href="' +
         pic +
         '"><font color="#4ba965">查看图片</font></a>'
     );
   } else {
     if (pic.length != 0) {
       msg +=
-        '<a target="_blank" href="' +
+        '<a data-fancybox="gallery" href="' +
         pic +
         '"><font style="margin: 0 6px;" color="#4ba965" >查看图片</font></a>';
     }
   }
+  msg = transEmoji(msg);
   p.innerHTML = msg;
 
   wrapper.appendChild(p);
@@ -136,18 +137,19 @@ function createReplyDeepBody(username, rusername, message, pic) {
   if (message.indexOf("[图片]") != -1) {
     message = message.replace(
       "[图片]",
-      '<a target="_blank" href="' +
+      '<a data-fancybox="gallery" href="' +
         pic +
         '"><font color="#4ba965">查看图片</font></a>'
     );
   } else {
     if (pic.length != 0) {
       message +=
-        '<a target="_blank" href="' +
+        '<a data-fancybox="gallery" href="' +
         pic +
         '"><font style="margin: 0 6px;" color="#4ba965" >查看图片</font></a>';
     }
   }
+  message = transEmoji(message);
   var reply = document.createElement("p");
   reply.className = "reply";
   reply.innerHTML =
@@ -162,4 +164,28 @@ function createReplyDeepBody(username, rusername, message, pic) {
     "</font>";
   wrapper.appendChild(reply);
   return wrapper;
+}
+
+function transEmoji(msg) {
+  return msg
+    .replace(
+      /\[doge\]/g,
+      '<img style="height: 18px; margin-bottom: -3px;" src="http://static.coolapk.com/emoticons/v9/coolapk_emotion_37_doge.png"></img>'
+    )
+    .replace(
+      /\[疑问\]/g,
+      '<img style="height: 18px; margin-bottom: -3px;" src="http://static.coolapk.com/emoticons/v9/coolapk_emotion_11_yiwen.png"></img>'
+    )
+    .replace(
+      /\[墨镜滑稽\]/g,
+      '<img style="height: 18px; margin-bottom: -3px;" src="http://static.coolapk.com/emoticons/v9/coolapk_emotion_67_mojinghuaji.png"></img>'
+    )
+    .replace(
+      /\[受虐滑稽\]/g,
+      '<img style="height: 18px; margin-bottom: -3px;" src="http://static.coolapk.com/emoticons/v9/coolapk_emotion_64_shounuehuaji.png"></img>'
+    )
+    .replace(
+      /\[皱眉\]/g,
+      '<img style="height: 18px; margin-bottom: -3px;" src="http://static.coolapk.com/emoticons/v9/coolapk_emotion_99_zhoumei.png"></img>'
+    );
 }
