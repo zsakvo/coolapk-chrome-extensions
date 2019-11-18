@@ -2,6 +2,9 @@
   color: #ff4d4f;
 }
 
+.feed-link-tag:hover {
+  color: #ff4d4f;
+}
 .userinfo {
   display: flex;
   flex-direction: row;

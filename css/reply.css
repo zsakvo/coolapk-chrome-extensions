@@ -2,6 +2,10 @@
   color: #ff4d4f;
 }
 
+.feed-link-tag:hover {
+  color: #ff4d4f;
+}
+
 .reply-wrapper {
   margin: 12px 0;
   border-bottom: 1px solid #e9e9e9;
