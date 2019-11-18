@@ -15,7 +15,7 @@
       "css": ["css/reply.css"]
     },
     {
-      "matches": ["*://www.coolapk.com/apk/*"],
+      "matches": ["*://www.coolapk.com/apk/*", "*://www.coolapk.com/game/*"],
       "js": ["js/getComment.js"],
       "css": ["css/comment.css"]
     }

@@ -13,7 +13,9 @@ function initViews() {
 initViews();
 var page = 1;
 var commentContent = document.getElementsByClassName("apk_left_two")[0];
-var id = window.location.href.replace("https://www.coolapk.com/apk/", "");
+var id = window.location.href
+  .replace(/.+com\/.+\//g, "")
+  .replace(/\?from.+/g, "");
 function initDatas() {
   var url = `https://api.coolapk.com/v6/apk/commentList?id=${id}&listType=lastupdate_desc&page=${page}`;
   chrome.runtime.sendMessage(url, datas => {
