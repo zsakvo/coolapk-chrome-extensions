@@ -25,7 +25,7 @@ function initDatas() {
         var avatar = data.userInfo.userAvatar;
         var username = data.username;
         var message = data.message;
-        let time = data.lastupdate;
+        let time = getTime(data.lastupdate * 1000);
         let like = data.likenum;
         let reply = data.replynum;
         let favorite = data.forwardnum;
@@ -94,5 +94,26 @@ function createComment(
 `;
   wrapper.innerHTML = html;
   return wrapper;
+}
+
+function getTime(time) {
+  var date = new Date(time);
+  Y = date.getFullYear() + "-";
+  M =
+    Appendzero(
+      date.getMonth() + 1 < 10
+        ? "0" + (date.getMonth() + 1)
+        : date.getMonth() + 1
+    ) + "-";
+  D = Appendzero(date.getDate()) + " ";
+  h = Appendzero(date.getHours()) + ":";
+  m = Appendzero(date.getMinutes()) + ":";
+  s = Appendzero(date.getSeconds());
+  return Y + M + D + h + m + s;
+}
+
+function Appendzero(obj) {
+  if (obj < 10) return "0" + "" + obj;
+  else return obj;
 }
 initDatas();
