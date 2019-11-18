@@ -13,6 +13,11 @@
       "matches": ["*://www.coolapk.com/feed/*"],
       "js": ["js/getReply.js"],
       "css": ["css/reply.css"]
+    },
+    {
+      "matches": ["*://www.coolapk.com/apk/*"],
+      "js": ["js/getComment.js"],
+      "css": ["css/comment.css"]
     }
   ],
   "permissions": ["*://*.coolapk.com/*"],
