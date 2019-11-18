@@ -23,11 +23,14 @@ fancyboxjs.onload = function() {
 (document.head || document.documentElement).appendChild(fancyboxjs);
 
 chrome.runtime.sendMessage(
-  "https://api.coolapk.com/v6/feed/detail?id=" + feedID,
+  "https://api.coolapk.com/v6/feed/replyList?id=" +
+    feedID +
+    "&listType=lastupdate_desc&page=1&discussMode=1&feedType=feed&blockStatus=0&fromFeedAuthor=0" +
+    feedID,
   json => {
-    console.log(json.hotReplyRows);
+    console.log(json);
     var feedContent = document.getElementsByClassName("hot-reply-footer")[0];
-    var datas = json.hotReplyRows;
+    var datas = json;
     datas.forEach(data => {
       var userAvatar = data.userAvatar;
       var username = data.username;
@@ -49,23 +52,6 @@ chrome.runtime.sendMessage(
       }
       feedContent.appendChild(replyBody);
     });
-    // var userAvatar = data.userAvatar;
-    // var username = data.username;
-    // var message = data.message;
-    // var replyBody = createReplyBody(userAvatar, username, message);
-    // if (data.replyRows.length > 0) {
-    //   let deepReplyWrapper = document.createElement("div");
-    //   deepReplyWrapper.className = "deep-reply-wrapper";
-    //   data.replyRows.forEach(element => {
-    //     let username = element.username;
-    //     let rusername = element.rusername;
-    //     let message = element.message;
-    //     let div = createReplyDeepBody(username, rusername, message);
-    //     deepReplyWrapper.appendChild(div);
-    //   });
-    //   replyBody.appendChild(deepReplyWrapper);
-    // }
-    // feedContent.appendChild(replyBody);
   }
 );
 
@@ -115,20 +101,19 @@ function createFeedBody(msg, pic) {
 
   var p = document.createElement("p");
 
-  console.log(msg.indexOf("[图片]"));
   if (msg.indexOf("[图片]") != -1) {
     msg = msg.replace(
       "[图片]",
       '<a data-fancybox="gallery" href="' +
         pic +
-        '"><font color="#4ba965">查看图片</font></a>'
+        '"><font color="#0F9D58">查看图片</font></a>'
     );
   } else {
     if (pic.length != 0) {
       msg +=
         '<a data-fancybox="gallery" href="' +
         pic +
-        '"><font style="margin: 0 6px;" color="#4ba965" >查看图片</font></a>';
+        '"><font style="margin: 0 6px;" color="#0F9D58" >查看图片</font></a>';
     }
   }
   msg = transEmoji(msg);
@@ -156,14 +141,14 @@ function createReplyDeepBody(username, rusername, message, pic) {
       "[图片]",
       '<a data-fancybox="gallery" href="' +
         pic +
-        '"><font color="#4ba965">查看图片</font></a>'
+        '"><font color="#0F9D58">查看图片</font></a>'
     );
   } else {
     if (pic.length != 0) {
       message +=
         '<a data-fancybox="gallery" href="' +
         pic +
-        '"><font style="margin: 0 6px;" color="#4ba965" >查看图片</font></a>';
+        '"><font style="margin: 0 6px;" color="#0F9D58" >查看图片</font></a>';
     }
   }
   message = transEmoji(message);

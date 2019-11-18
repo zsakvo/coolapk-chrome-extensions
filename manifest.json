@@ -10,7 +10,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.coolapk.com/*"],
+      "matches": ["*://www.coolapk.com/feed/*"],
       "js": ["js/demo.js"],
       "css": ["css/reply.css"]
     }

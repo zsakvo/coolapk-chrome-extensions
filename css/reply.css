@@ -26,14 +26,14 @@
 }
 
 .reply-username > p {
-  color: #212121;
+  color: #0f9d58;
   font-size: 15px;
   line-height: 150%;
   margin-top: 10px;
 }
 
 .reply-body {
-  margin: 16px;
+  margin: 8px 40px;
 }
 
 reply-body > p {
@@ -42,7 +42,7 @@ reply-body > p {
 }
 .deep-reply-wrapper {
   padding: 12px;
-  margin-left: 16px;
+  margin-left: 28px;
   font-size: 14px;
   background: #f5f5f5;
   margin-bottom: 24px;
@@ -54,4 +54,5 @@ reply-body > p {
 
 .reply {
   width: 100%;
+  padding: 2px 0;
 }
