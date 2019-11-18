@@ -5,7 +5,8 @@ contentWideMore();
 var feedID = window.location.href
   .replace("https://www.coolapk.com/feed/", "")
   .replace(/.shareKey.+/g, "");
-
+var page = 1;
+var canScroll = true;
 var fancyboxcss = document.createElement("link");
 fancyboxcss.type = "text/css";
 fancyboxcss.rel = "stylesheet";
@@ -22,38 +23,79 @@ fancyboxjs.onload = function() {
 };
 (document.head || document.documentElement).appendChild(fancyboxjs);
 
-chrome.runtime.sendMessage(
-  "https://api.coolapk.com/v6/feed/replyList?id=" +
-    feedID +
-    "&listType=lastupdate_desc&page=1&discussMode=1&feedType=feed&blockStatus=0&fromFeedAuthor=0" +
-    feedID,
-  json => {
-    console.log(json);
-    var feedContent = document.getElementsByClassName("hot-reply-footer")[0];
-    var datas = json;
-    datas.forEach(data => {
-      var userAvatar = data.userAvatar;
-      var username = data.username;
-      var message = data.message;
-      var pic = data.pic;
-      var replyBody = createReplyBody(userAvatar, username, message, pic);
-      if (data.replyRows.length > 0) {
-        let deepReplyWrapper = document.createElement("div");
-        deepReplyWrapper.className = "deep-reply-wrapper";
-        data.replyRows.forEach(element => {
-          let username = element.username;
-          let rusername = element.rusername;
-          let message = element.message;
-          let pic = element.pic;
-          let div = createReplyDeepBody(username, rusername, message, pic);
-          deepReplyWrapper.appendChild(div);
-        });
-        replyBody.appendChild(deepReplyWrapper);
-      }
-      feedContent.appendChild(replyBody);
-    });
-  }
+var scrolljs = document.createElement("script");
+scrolljs.src = chrome.extension.getURL("js/scroll.js");
+scrolljs.onload = function() {
+  this.parentNode.removeChild(this);
+};
+(document.head || document.documentElement).appendChild(scrolljs);
+
+window.addEventListener(
+  "message",
+  function(e) {
+    switch (e.data.act) {
+      case "next":
+        if (canScroll) {
+          page++;
+          getReply(feedID, page);
+        }
+        break;
+    }
+  },
+  false
 );
+getReply(feedID, page);
+function getReply(feedID, page) {
+  canScroll = false;
+  var feedContent = document.getElementsByClassName("hot-reply-footer")[0];
+  var loading = document.createElement("div");
+  loading.className = "loading-datas";
+  loading.innerText = "正在获取数据……";
+  feedContent.appendChild(loading);
+  chrome.runtime.sendMessage(
+    "https://api.coolapk.com/v6/feed/replyList?id=" +
+      feedID +
+      "&listType=lastupdate_desc&page=" +
+      page +
+      "&discussMode=1&feedType=feed&blockStatus=0&fromFeedAuthor=0" +
+      feedID,
+    json => {
+      console.log(json);
+      feedContent.lastChild.remove();
+      var datas = json;
+      if (datas.length != 0) {
+        datas.forEach(data => {
+          var userAvatar = data.userAvatar;
+          var username = data.username;
+          var message = data.message;
+          var pic = data.pic;
+          var replyBody = createReplyBody(userAvatar, username, message, pic);
+          if (data.replyRows.length > 0) {
+            let deepReplyWrapper = document.createElement("div");
+            deepReplyWrapper.className = "deep-reply-wrapper";
+            data.replyRows.forEach(element => {
+              let username = element.username;
+              let rusername = element.rusername;
+              let message = element.message;
+              let pic = element.pic;
+              let div = createReplyDeepBody(username, rusername, message, pic);
+              deepReplyWrapper.appendChild(div);
+            });
+            replyBody.appendChild(deepReplyWrapper);
+          }
+          feedContent.appendChild(replyBody);
+        });
+        canScroll = true;
+      } else {
+        canScroll = false;
+        var finish = document.createElement("div");
+        finish.className = "no-more-reply";
+        finish.innerText = "没有更多数据啦";
+        feedContent.appendChild(finish);
+      }
+    }
+  );
+}
 
 function removeAppOpen() {
   document.getElementsByClassName("app-open")[0].remove();

@@ -57,3 +57,11 @@ reply-body > p {
   width: 100%;
   padding: 2px 0;
 }
+
+.no-more-reply,
+.loading-datas {
+  padding: 24px;
+  width: 100%;
+  text-align: center;
+  color: #9e9e9e;
+}
