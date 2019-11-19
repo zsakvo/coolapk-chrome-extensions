@@ -192,12 +192,11 @@
 
 .message-pic-item {
   overflow: hidden;
-  width: 31%;
-  height: 207px;
-  margin: 1%;
+  margin: 0 32px 32px 0;
 }
 
 .message-pic {
-  height: 207px;
+  height: 150px;
+  width: 150px;
   object-fit: cover;
 }

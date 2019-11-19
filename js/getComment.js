@@ -108,7 +108,7 @@ function getComment() {
         let like = data.likenum;
         let reply = data.replynum;
         let favorite = data.forwardnum;
-        let url = data.url;
+        let url = data.shareUrl;
         let pic = data.pic;
         let picArr = null;
         if (pic.length > 0) {
