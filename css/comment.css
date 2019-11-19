@@ -5,6 +5,81 @@
 .feed-link-tag:hover {
   color: #ff4d4f;
 }
+
+.apk-card {
+  padding: 16px 24px 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-info {
+  display: flex;
+  align-items: center;
+}
+
+.app-info > img {
+  height: 56px;
+  width: 56px;
+}
+
+.app-info > .app-name {
+  margin-left: 18px;
+  font-size: 16px;
+}
+
+.app-name > div {
+  width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  margin-top: 4px;
+}
+.app-version {
+  font-size: 12px;
+  color: #999;
+}
+.app-details {
+  display: flex;
+  flex-direction: row;
+  margin-top: 32px;
+  justify-content: space-around;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+  align-items: center;
+}
+
+.detail-item > .num {
+  color: #469e59;
+  font-size: 14px;
+}
+
+.detail-item > .item {
+  color: #99a2aa;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.download-apk-wrapper {
+  padding: 24px;
+  margin-top: 8px;
+}
+
+.download-apk {
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid #469e59;
+  color: #469e59;
+  padding: 6px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+}
 .userinfo {
   display: flex;
   flex-direction: row;
@@ -99,4 +174,30 @@
   background-size: contain;
   background-repeat: no-repeat;
   color: #757575;
+}
+
+.no-more-reply,
+.loading-datas {
+  padding: 24px;
+  width: 100%;
+  text-align: center;
+  color: #9e9e9e;
+}
+
+.message-pic-group {
+  margin: 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.message-pic-item {
+  overflow: hidden;
+  width: 31%;
+  height: 207px;
+  margin: 1%;
+}
+
+.message-pic {
+  height: 207px;
+  object-fit: cover;
 }

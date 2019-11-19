@@ -27,6 +27,14 @@
   "web_accessible_resources": [
     "js/fancybox.js",
     "js/scroll.js",
-    "css/fancybox.css"
+    "js/top.js",
+    "js/swipebox.js",
+    "js/swipeboxinject.js",
+    "css/fancybox.css",
+    "css/swipebox.css",
+    "img/loader.gif",
+    "img/icons.png",
+    "img/icons.svg",
+    "img/top.png"
   ]
 }

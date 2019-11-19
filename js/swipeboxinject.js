@@ -1,0 +1,2 @@
+$(".swipebox").swipebox();
+new Top();
