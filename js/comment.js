@@ -26,7 +26,6 @@ scrolljs.onload = function() {
 window.addEventListener(
   "message",
   function(e) {
-    console.log(e.data);
     switch (e.data.act) {
       case "next":
         if (canScroll) {
@@ -95,7 +94,6 @@ function getComment() {
   loading.innerText = "正在获取数据……";
   commentContent.appendChild(loading);
   chrome.runtime.sendMessage(url, datas => {
-    console.log(datas);
     commentContent.lastChild.remove();
     if (datas.length != 0) {
       datas.forEach(data => {
@@ -249,13 +247,6 @@ function Appendzero(obj) {
   if (obj < 10) return "0" + "" + obj;
   else return obj;
 }
-
-console.log(icon);
-console.log(name);
-console.log(info);
-console.log(downloadNum);
-console.log(attentionNum);
-console.log(commentNum);
 initViews();
 var apkCard = createApkCard(icon, name, downloadNum, attentionNum, commentNum);
 apkInfo.appendChild(apkCard);

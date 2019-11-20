@@ -86,7 +86,6 @@ function getReply(feedContent, feedID, page) {
   chrome.runtime.sendMessage(
     `https://api.coolapk.com/v6/feed/replyList?id=${feedID}&listType=lastupdate_desc&page=${page}&discussMode=1&feedType=feed&blockStatus=0&fromFeedAuthor=0`,
     json => {
-      console.log(json);
       feedContent.lastChild.remove();
       var datas = json;
       if (datas.length != 0) {
