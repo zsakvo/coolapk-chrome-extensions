@@ -2,7 +2,7 @@ document.getElementById("navbar-market").remove();
 document.getElementById("navbar-contact").remove();
 document.getElementById("navbar-about").remove();
 
-var html = `<input id="search-input" type="text" placeholder="搜索应用" style="
+var html = `<input onkeyup=" if(event.keyCode==13) {searchApp()}" id="search-input" type="text" placeholder="搜索应用" style="
     height: 38px;
     width: 160px;
     margin-left: 80%;
@@ -21,7 +21,7 @@ input.innerHTML = html;
 document.getElementsByTagName("ul")[0].appendChild(input);
 
 var searchjs = document.createElement("script");
-searchjs.src = chrome.extension.getURL("js/inject/search.js");
+searchjs.src = chrome.extension.getURL("js/lib/search.js");
 searchjs.onload = function() {
   this.parentNode.removeChild(this);
 };

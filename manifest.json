@@ -40,7 +40,7 @@
     "js/lib/toTop.js",
     "js/lib/injectTop.js",
     "js/lib/injectComment.js",
-    "js/inject/search.js",
+    "js/lib/search.js",
     "css/fancybox.css",
     "img/loader.gif",
     "img/icons.png",
