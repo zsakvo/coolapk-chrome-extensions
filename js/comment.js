@@ -14,13 +14,6 @@ fancyboxjs.onload = function() {
 };
 (document.head || document.documentElement).appendChild(fancyboxjs);
 
-var topjs = document.createElement("script");
-topjs.src = chrome.extension.getURL("js/top.js");
-topjs.onload = function() {
-  this.parentNode.removeChild(this);
-};
-(document.head || document.documentElement).appendChild(topjs);
-
 //注入 滚动监听
 document.getElementsByTagName("body")[0].style.height = "auto";
 var scrolljs = document.createElement("script");
@@ -45,6 +38,24 @@ window.addEventListener(
   },
   false
 );
+
+var topjs = document.createElement("script");
+topjs.src = chrome.extension.getURL("js/lib/toTop.js");
+topjs.onload = function() {
+  this.parentNode.removeChild(this);
+};
+(document.head || document.documentElement).appendChild(topjs);
+
+var topElement = document.createElement("div");
+topElement.className = "to-top";
+document.getElementsByClassName("app_left")[0].appendChild(topElement);
+
+var injectTopjs = document.createElement("script");
+injectTopjs.src = chrome.extension.getURL("js/lib/injectTop.js");
+injectTopjs.onload = function() {
+  this.parentNode.removeChild(this);
+};
+(document.head || document.documentElement).appendChild(injectTopjs);
 
 var apkInfo = document.getElementsByClassName("apk_left_one")[0];
 var commentContent = document.getElementsByClassName("apk_left_two")[0];

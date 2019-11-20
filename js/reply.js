@@ -27,6 +27,24 @@ scrolljs.onload = function() {
 };
 (document.head || document.documentElement).appendChild(scrolljs);
 
+var topjs = document.createElement("script");
+topjs.src = chrome.extension.getURL("js/lib/toTop.js");
+topjs.onload = function() {
+  this.parentNode.removeChild(this);
+};
+(document.head || document.documentElement).appendChild(topjs);
+
+var topElement = document.createElement("div");
+topElement.className = "to-top";
+document.getElementById("feed-main").appendChild(topElement);
+
+var injectTopjs = document.createElement("script");
+injectTopjs.src = chrome.extension.getURL("js/lib/injectTop.js");
+injectTopjs.onload = function() {
+  this.parentNode.removeChild(this);
+};
+(document.head || document.documentElement).appendChild(injectTopjs);
+
 window.addEventListener(
   "message",
   function(e) {

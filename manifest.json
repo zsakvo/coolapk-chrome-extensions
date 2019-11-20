@@ -27,7 +27,8 @@
   "web_accessible_resources": [
     "js/lib/fancybox.js",
     "js/lib/scroll.js",
-    "js/top.js",
+    "js/lib/toTop.js",
+    "js/lib/injectTop.js",
     "css/fancybox.css",
     "img/loader.gif",
     "img/icons.png",
