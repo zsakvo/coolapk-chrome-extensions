@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "coolapk-web",
   "version": "1.0",
-  "description": "provide content for coolapk web",
+  "description": "provide content for web coolapk (by zsakvo)",
   "icons": {
     "16": "img/16.png",
     "48": "img/48.png",
