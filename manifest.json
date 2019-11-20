@@ -10,6 +10,16 @@
   },
   "content_scripts": [
     {
+      "matches": ["*://coolapk.com/*", "*://www.coolapk.com/*"],
+      "js": ["js/topbar.js"],
+      "css": ["css/topbar.css"]
+    },
+    {
+      "matches": ["*://www.coolapk.com/feed/*"],
+      "js": ["js/lib/transemoji.js", "js/reply.js"],
+      "css": ["css/reply.css"]
+    },
+    {
       "matches": ["*://www.coolapk.com/feed/*"],
       "js": ["js/lib/transemoji.js", "js/reply.js"],
       "css": ["css/reply.css"]
@@ -30,6 +40,7 @@
     "js/lib/toTop.js",
     "js/lib/injectTop.js",
     "js/lib/injectComment.js",
+    "js/inject/search.js",
     "css/fancybox.css",
     "img/loader.gif",
     "img/icons.png",
