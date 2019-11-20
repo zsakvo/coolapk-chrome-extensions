@@ -88,6 +88,13 @@
   border-radius: 30px;
   cursor: pointer;
 }
+
+.download-apk:hover {
+  background: #469e59;
+  color: #fff;
+  transition-duration: 0.4s;
+}
+
 .userinfo {
   display: flex;
   flex-direction: row;
