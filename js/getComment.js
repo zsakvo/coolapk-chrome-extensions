@@ -1,19 +1,18 @@
-//注入 swipebox
-var swipeboxcss = document.createElement("link");
-swipeboxcss.type = "text/css";
-swipeboxcss.rel = "stylesheet";
-swipeboxcss.href = chrome.extension.getURL("css/swipebox.css");
+var fancyboxcss = document.createElement("link");
+fancyboxcss.type = "text/css";
+fancyboxcss.rel = "stylesheet";
+fancyboxcss.href = chrome.extension.getURL("css/fancybox.css");
 document
   .getElementsByTagName("head")
   .item(0)
-  .appendChild(swipeboxcss);
+  .appendChild(fancyboxcss);
 
-var swipeboxjs = document.createElement("script");
-swipeboxjs.src = chrome.extension.getURL("js/swipebox.js");
-swipeboxjs.onload = function() {
+var fancyboxjs = document.createElement("script");
+fancyboxjs.src = chrome.extension.getURL("js/fancybox.js");
+fancyboxjs.onload = function() {
   this.parentNode.removeChild(this);
 };
-(document.head || document.documentElement).appendChild(swipeboxjs);
+(document.head || document.documentElement).appendChild(fancyboxjs);
 
 var topjs = document.createElement("script");
 topjs.src = chrome.extension.getURL("js/top.js");
@@ -128,12 +127,6 @@ function getComment() {
         commentContent.appendChild(commentBody);
       });
       canScroll = true;
-      var injectjs = document.createElement("script");
-      injectjs.src = chrome.extension.getURL("js/swipeboxinject.js");
-      injectjs.onload = function() {
-        this.parentNode.removeChild(this);
-      };
-      (document.head || document.documentElement).appendChild(injectjs);
     } else {
       canScroll = false;
       var finish = document.createElement("div");
@@ -167,7 +160,7 @@ function createComment(
     picArr.forEach(pic => {
       picHtml += `
     <div class="message-pic-item">
-        <a class="swipebox" href="${pic}">
+        <a data-fancybox="gallery" href="${pic}">
         <img src="${pic}" class="message-pic">
         </a>
     </div>
