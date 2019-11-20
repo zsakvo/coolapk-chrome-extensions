@@ -8,7 +8,7 @@ document
   .appendChild(fancyboxcss);
 
 var fancyboxjs = document.createElement("script");
-fancyboxjs.src = chrome.extension.getURL("js/fancybox.js");
+fancyboxjs.src = chrome.extension.getURL("js/lib/fancybox.js");
 fancyboxjs.onload = function() {
   this.parentNode.removeChild(this);
 };
@@ -24,7 +24,7 @@ topjs.onload = function() {
 //注入 滚动监听
 document.getElementsByTagName("body")[0].style.height = "auto";
 var scrolljs = document.createElement("script");
-scrolljs.src = chrome.extension.getURL("js/scroll.js");
+scrolljs.src = chrome.extension.getURL("js/lib/scroll.js");
 scrolljs.onload = function() {
   this.parentNode.removeChild(this);
 };

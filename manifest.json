@@ -11,22 +11,22 @@
   "content_scripts": [
     {
       "matches": ["*://www.coolapk.com/feed/*"],
-      "js": ["js/getReply.js"],
+      "js": ["js/reply.js"],
       "css": ["css/reply.css"]
     },
     {
       "matches": ["*://www.coolapk.com/apk/*", "*://www.coolapk.com/game/*"],
-      "js": ["js/getComment.js"],
+      "js": ["js/comment.js"],
       "css": ["css/comment.css"]
     }
   ],
   "permissions": ["*://*.coolapk.com/*"],
   "background": {
-    "scripts": ["js/token.js", "js/background.js"]
+    "scripts": ["js/lib/token.js", "js/background/background.js"]
   },
   "web_accessible_resources": [
-    "js/fancybox.js",
-    "js/scroll.js",
+    "js/lib/fancybox.js",
+    "js/lib/scroll.js",
     "js/top.js",
     "css/fancybox.css",
     "img/loader.gif",

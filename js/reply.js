@@ -14,14 +14,14 @@ document
   .appendChild(fancyboxcss);
 
 var fancyboxjs = document.createElement("script");
-fancyboxjs.src = chrome.extension.getURL("js/fancybox.js");
+fancyboxjs.src = chrome.extension.getURL("js/lib/fancybox.js");
 fancyboxjs.onload = function() {
   this.parentNode.removeChild(this);
 };
 (document.head || document.documentElement).appendChild(fancyboxjs);
 
 var scrolljs = document.createElement("script");
-scrolljs.src = chrome.extension.getURL("js/scroll.js");
+scrolljs.src = chrome.extension.getURL("js/lib/scroll.js");
 scrolljs.onload = function() {
   this.parentNode.removeChild(this);
 };
