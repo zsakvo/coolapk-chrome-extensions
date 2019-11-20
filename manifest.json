@@ -10,22 +10,22 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://coolapk.com/*", "*://www.coolapk.com/*"],
+      "matches": ["*://*.coolapk.com/*"],
       "js": ["js/topbar.js"],
       "css": ["css/topbar.css"]
     },
     {
-      "matches": ["*://www.coolapk.com/feed/*"],
+      "matches": ["*://*.coolapk.com/feed/*"],
       "js": ["js/lib/transemoji.js", "js/reply.js"],
       "css": ["css/reply.css"]
     },
     {
-      "matches": ["*://www.coolapk.com/feed/*"],
+      "matches": ["*://*.coolapk.com/feed/*"],
       "js": ["js/lib/transemoji.js", "js/reply.js"],
       "css": ["css/reply.css"]
     },
     {
-      "matches": ["*://www.coolapk.com/apk/*", "*://www.coolapk.com/game/*"],
+      "matches": ["*://*.coolapk.com/apk/*", "*://*.coolapk.com/game/*"],
       "js": ["js/lib/transemoji.js", "js/comment.js"],
       "css": ["css/comment.css"]
     }
