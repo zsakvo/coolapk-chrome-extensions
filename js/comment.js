@@ -150,7 +150,8 @@ function createComment(
 ) {
   var wrapper = document.createElement("div");
   wrapper.className = "comment-wrapper";
-  var msg = message.replace(
+  var msg = transEmoji(message, "3px");
+  msg = msg.replace(
     '<a href="">查看更多</a>',
     '<a class="feed-link-url" target="_blank" href="' + url + '">查看更多</a>'
   );

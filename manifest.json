@@ -11,12 +11,12 @@
   "content_scripts": [
     {
       "matches": ["*://www.coolapk.com/feed/*"],
-      "js": ["js/reply.js"],
+      "js": ["js/lib/transemoji.js", "js/reply.js"],
       "css": ["css/reply.css"]
     },
     {
       "matches": ["*://www.coolapk.com/apk/*", "*://www.coolapk.com/game/*"],
-      "js": ["js/comment.js"],
+      "js": ["js/lib/transemoji.js", "js/comment.js"],
       "css": ["css/comment.css"]
     }
   ],
