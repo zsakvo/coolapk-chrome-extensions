@@ -29,6 +29,7 @@
     "js/lib/scroll.js",
     "js/lib/toTop.js",
     "js/lib/injectTop.js",
+    "js/lib/injectComment.js",
     "css/fancybox.css",
     "img/loader.gif",
     "img/icons.png",

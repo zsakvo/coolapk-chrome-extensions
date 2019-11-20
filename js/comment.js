@@ -48,10 +48,10 @@ topjs.onload = function() {
 
 var topElement = document.createElement("div");
 topElement.className = "to-top";
-document.getElementsByClassName("app_left")[0].appendChild(topElement);
+document.getElementsByClassName("warpper")[0].appendChild(topElement);
 
 var injectTopjs = document.createElement("script");
-injectTopjs.src = chrome.extension.getURL("js/lib/injectTop.js");
+injectTopjs.src = chrome.extension.getURL("js/lib/injectComment.js");
 injectTopjs.onload = function() {
   this.parentNode.removeChild(this);
 };
@@ -80,19 +80,7 @@ var canScroll = true;
 
 //修改界面
 function initViews() {
-  document.getElementsByClassName("apk_right")[0].remove();
-  document.getElementsByClassName("apk_topba_code")[0].remove();
-  document.getElementsByClassName("apk_left_two_box")[0].remove();
-  document.getElementsByClassName("left_download")[0].remove();
-  document.getElementsByClassName("bread_nav")[0].remove();
-  document.getElementsByClassName("apk_topbar")[0].remove();
-  document.getElementById("footer").remove();
   document.getElementsByClassName("app_left")[0].style.width = "100%";
-  apkInfo.style.width = "244px";
-  apkInfo.style.position = "fixed";
-  apkInfo.style.marginTop = "20px";
-  apkInfo.style.height = "264px";
-  apkInfo.style.paddingTop = 0;
   commentContent.style.width = "634px";
   commentContent.style.paddingTop = 0;
   commentContent.style.margin = "20px auto";
