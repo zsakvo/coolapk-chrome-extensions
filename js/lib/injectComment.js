@@ -18,12 +18,14 @@ $(".apk_left_one").css({
   "padding-top": 0
 });
 if (width <= 1200) {
+  $(".apk_left_two").css({ width: "100%" });
   $(".apk_left_one").css({
     width: "100%",
     position: ""
   });
   $(".under").remove();
 } else {
+  $(".apk_left_two").css({ width: "634px" });
   $(".apk_left_one").css({
     width: "244px",
     position: "fixed"
@@ -33,12 +35,14 @@ if (width <= 1200) {
 window.onresize = function() {
   var width = $(window).width();
   if (width <= 1200) {
+    $(".apk_left_two").css({ width: "100%" });
     $(".apk_left_one").css({
       width: "100%",
       position: ""
     });
     $(".under").remove();
   } else {
+    $(".apk_left_two").css({ width: "634px" });
     $(".apk_left_one").css({
       width: "244px",
       position: "fixed"
