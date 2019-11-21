@@ -25,7 +25,7 @@
       "css": ["css/reply.css"]
     },
     {
-      "matches": ["*://*.coolapk.com/apk/*", "*://*.coolapk.com/game/*"],
+      "matches": ["*://*.coolapk.com/apk/*.*", "*://*.coolapk.com/game/*.*"],
       "js": ["js/lib/transemoji.js", "js/comment.js"],
       "css": ["css/comment.css"]
     }
