@@ -1,3 +1,7 @@
+var id = window.location.href
+  .replace(/.+com\/.+\//g, "")
+  .replace(/\?from.+/g, "");
+var targetID = "";
 var fancyboxcss = document.createElement("link");
 fancyboxcss.type = "text/css";
 fancyboxcss.rel = "stylesheet";
@@ -13,6 +17,32 @@ fancyboxjs.onload = function() {
   this.parentNode.removeChild(this);
 };
 (document.head || document.documentElement).appendChild(fancyboxjs);
+
+//注入 Snackbar
+var snackbarcss = document.createElement("link");
+snackbarcss.type = "text/css";
+snackbarcss.rel = "stylesheet";
+snackbarcss.href = chrome.extension.getURL("css/snackbar.css");
+document
+  .getElementsByTagName("head")
+  .item(0)
+  .appendChild(snackbarcss);
+
+var materialcss = document.createElement("link");
+materialcss.type = "text/css";
+materialcss.rel = "stylesheet";
+materialcss.href = chrome.extension.getURL("css/material.css");
+document
+  .getElementsByTagName("head")
+  .item(0)
+  .appendChild(materialcss);
+
+var snackbarjs = document.createElement("script");
+snackbarjs.src = chrome.extension.getURL("js/lib/snackbar.js");
+snackbarjs.onload = function() {
+  this.parentNode.removeChild(this);
+};
+(document.head || document.documentElement).appendChild(snackbarjs);
 
 //注入 滚动监听
 document.getElementsByTagName("body")[0].style.height = "auto";
@@ -33,6 +63,44 @@ window.addEventListener(
           getComment();
         }
         break;
+      case "POST":
+        chrome.runtime.sendMessage(
+          {
+            url: "https://api.coolapk.com/v6/feed/createFeed",
+            method: "POST",
+            body: e.data.body
+          },
+          datas => {
+            console.log(datas);
+            if (datas != null) {
+              if (datas.status != 1) {
+                console.log(datas);
+              }
+              e.source.postMessage(
+                { act: "POST_RESULT", value: datas.status },
+                e.origin
+              );
+            } else {
+              e.source.postMessage({ act: "POST_RESULT", value: -1 }, e.origin);
+            }
+          }
+        );
+        break;
+      case "GET_DETAIL":
+        chrome.runtime.sendMessage(
+          {
+            url: "https://api.coolapk.com/v6/apk/detail?id=" + id,
+            method: "GET"
+          },
+          datas => {
+            targetID = datas.target_id;
+            e.source.postMessage(
+              { act: "GET_ID", value: datas.target_id },
+              e.origin
+            );
+          }
+        );
+        break;
     }
   },
   false
@@ -48,6 +116,14 @@ topjs.onload = function() {
 var topElement = document.createElement("div");
 topElement.className = "to-top";
 document.getElementsByClassName("warpper")[0].appendChild(topElement);
+document.getElementsByClassName("warpper")[0].appendChild(createNewComment());
+
+var newCommentJs = document.createElement("script");
+newCommentJs.src = chrome.extension.getURL("js/lib/injectNewComment.js");
+newCommentJs.onload = function() {
+  this.parentNode.removeChild(this);
+};
+(document.head || document.documentElement).appendChild(newCommentJs);
 
 var injectTopjs = document.createElement("script");
 injectTopjs.src = chrome.extension.getURL("js/lib/injectComment.js");
@@ -59,9 +135,6 @@ injectTopjs.onload = function() {
 var apkInfo = document.getElementsByClassName("apk_left_one")[0];
 var commentContent = document.getElementsByClassName("apk_left_two")[0];
 var page = 1;
-var id = window.location.href
-  .replace(/.+com\/.+\//g, "")
-  .replace(/\?from.+/g, "");
 var icon = document.getElementsByClassName("apk_topbar")[0].childNodes[1].src;
 var name =
   "<div>" +
@@ -93,45 +166,51 @@ function getComment() {
   loading.className = "loading-datas";
   loading.innerText = "正在获取数据……";
   commentContent.appendChild(loading);
-  chrome.runtime.sendMessage(url, datas => {
-    commentContent.lastChild.remove();
-    if (datas.length != 0) {
-      datas.forEach(data => {
-        var avatar = data.userInfo.userAvatar;
-        var username = data.username;
-        var message = data.message;
-        let time = getTime(data.lastupdate * 1000);
-        let like = data.likenum;
-        let reply = data.replynum;
-        let favorite = data.forwardnum;
-        let url = data.shareUrl;
-        let pic = data.pic;
-        let picArr = null;
-        if (pic.length > 0) {
-          picArr = data.picArr;
-        }
-        var commentBody = createComment(
-          avatar,
-          username,
-          time,
-          message,
-          like,
-          reply,
-          favorite,
-          url,
-          picArr
-        );
-        commentContent.appendChild(commentBody);
-      });
-      canScroll = true;
-    } else {
-      canScroll = false;
-      var finish = document.createElement("div");
-      finish.className = "no-more-reply";
-      finish.innerText = "没有更多数据啦";
-      commentContent.appendChild(finish);
+  chrome.runtime.sendMessage(
+    {
+      url: url,
+      method: "GET"
+    },
+    datas => {
+      commentContent.lastChild.remove();
+      if (datas.length != 0) {
+        datas.forEach(data => {
+          var avatar = data.userInfo.userAvatar;
+          var username = data.username;
+          var message = data.message;
+          let time = getTime(data.lastupdate * 1000);
+          let like = data.likenum;
+          let reply = data.replynum;
+          let favorite = data.forwardnum;
+          let url = data.shareUrl;
+          let pic = data.pic;
+          let picArr = null;
+          if (pic.length > 0) {
+            picArr = data.picArr;
+          }
+          var commentBody = createComment(
+            avatar,
+            username,
+            time,
+            message,
+            like,
+            reply,
+            favorite,
+            url,
+            picArr
+          );
+          commentContent.appendChild(commentBody);
+        });
+        canScroll = true;
+      } else {
+        canScroll = false;
+        var finish = document.createElement("div");
+        finish.className = "no-more-reply";
+        finish.innerText = "没有更多数据啦";
+        commentContent.appendChild(finish);
+      }
     }
-  });
+  );
 }
 
 //创建评论
@@ -247,6 +326,20 @@ function Appendzero(obj) {
   if (obj < 10) return "0" + "" + obj;
   else return obj;
 }
+
+function createNewComment() {
+  var wrapper = document.createElement("div");
+  wrapper.className = "create-comment-wrapper";
+  wrapper.innerHTML = `
+  <div class="create-comment">
+  <div class="input-wrapper">
+    <textarea class="input-comment" placeholder="留下你的评论..."></textarea>
+  </div>
+</div>
+  `;
+  return wrapper;
+}
+
 initViews();
 var apkCard = createApkCard(icon, name, downloadNum, attentionNum, commentNum);
 apkInfo.appendChild(apkCard);

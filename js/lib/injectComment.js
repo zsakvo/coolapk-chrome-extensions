@@ -1,6 +1,6 @@
 $(".to-top").toTop({
   right: 40,
-  bottom: 40
+  bottom: 96
 });
 
 $(".apk_right")[0].remove();

@@ -84,7 +84,10 @@ function getReply(feedContent, feedID, page) {
   loading.innerText = "正在获取数据……";
   feedContent.appendChild(loading);
   chrome.runtime.sendMessage(
-    `https://api.coolapk.com/v6/feed/replyList?id=${feedID}&listType=lastupdate_desc&page=${page}&discussMode=1&feedType=feed&blockStatus=0&fromFeedAuthor=0`,
+    {
+      url: `https://api.coolapk.com/v6/feed/replyList?id=${feedID}&listType=lastupdate_desc&page=${page}&discussMode=1&feedType=feed&blockStatus=0&fromFeedAuthor=0`,
+      method: "GET"
+    },
     json => {
       feedContent.lastChild.remove();
       var datas = json;
