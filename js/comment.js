@@ -101,6 +101,20 @@ window.addEventListener(
           }
         );
         break;
+      case "takeLike":
+        var id = e.data.id;
+        chrome.runtime.sendMessage({
+          url: `https://api.coolapk.com/v6/feed/like?id=${id}&detail=0`,
+          method: "GET"
+        });
+        break;
+      case "takeUnlike":
+        var id = e.data.id;
+        chrome.runtime.sendMessage({
+          url: `https://api.coolapk.com/v6/feed/unlike?id=${id}&detail=0`,
+          method: "GET"
+        });
+        break;
     }
   },
   false
@@ -175,11 +189,13 @@ function getComment() {
       commentContent.lastChild.remove();
       if (datas.length != 0) {
         datas.forEach(data => {
+          var id = data.id;
           var avatar = data.userInfo.userAvatar;
           var username = data.username;
           var message = data.message;
           let time = getTime(data.lastupdate * 1000);
           let like = data.likenum;
+          let liked = data.userAction.like;
           let reply = data.replynum;
           let favorite = data.forwardnum;
           let url = data.shareUrl;
@@ -189,11 +205,13 @@ function getComment() {
             picArr = data.picArr;
           }
           var commentBody = createComment(
+            id,
             avatar,
             username,
             time,
             message,
             like,
+            liked,
             reply,
             favorite,
             url,
@@ -215,11 +233,13 @@ function getComment() {
 
 //创建评论
 function createComment(
+  id,
   avatar,
   name,
   time,
   message,
   like,
+  liked,
   reply,
   favorite,
   url,
@@ -264,7 +284,9 @@ function createComment(
 </div>
 ${picHtml}
 <div class="comment-status">
-  <div class="like"><a href="javascript:volid(0);">${like}</a></div>
+  <div class="like ${
+    liked == 1 ? "liked" : "unlike"
+  }"><a href="javascript:void(0);" onclick="takeLike(${liked},${id},this)">${like}</a></div>
   <div class="reply"><a target="_blank" href="${url}">${reply}</a></div>
   <div class="favorite"><a href="javascript:volid(0);">${favorite}</a></div>
 </div>
