@@ -28,9 +28,13 @@
       "matches": ["*://*.coolapk.com/apk/*.*", "*://*.coolapk.com/game/*.*"],
       "js": ["js/lib/transemoji.js", "js/comment.js"],
       "css": ["css/comment.css"]
+    },
+    {
+      "matches": ["*://*.coolapk.com/h5/*"],
+      "js": ["js/lib/summary.js"]
     }
   ],
-  "permissions": ["*://*.coolapk.com/*"],
+  "permissions": ["*://*.coolapk.com/*", "webRequest", "webRequestBlocking"],
   "background": {
     "scripts": ["js/lib/token.js", "js/background/background.js"]
   },
